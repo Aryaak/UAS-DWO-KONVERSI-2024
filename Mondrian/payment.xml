@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<Schema name="payment">
+	<Cube name="Payment" defaultMeasure="Amount">
+		<Table name="fact_payment"/>
+		<Dimension name="Store" foreignKey ="sk_store">
+			<Hierarchy hasAll="true" allMemberName="All Store" primaryKey ="sk_store">
+				<Table name="dim_store"/>
+				<Level name="StoreAddress" column="store_address"/>
+			</Hierarchy>
+		</Dimension>
+		<Dimension name="Staff" foreignKey ="sk_staff">
+			<Hierarchy hasAll="true" allMemberName="All Staff" primaryKey ="sk_staff">
+				<Table name="dim_staff"/>
+				<Level name="StaffName" column="staff_name"/>
+			</Hierarchy>
+		</Dimension>
+		<Dimension name="Category Film" foreignKey ="sk_film">
+			<Hierarchy hasAll="true" allMemberName="All Category Film" primaryKey ="sk_category_film">
+				<Table name="dim_category_film"/>
+				<Level name="CategoryFilmName" column="category_film_name"/>
+			</Hierarchy>
+		</Dimension>
+		<Dimension name="Customer" foreignKey ="sk_customer">
+			<Hierarchy hasAll="true" allMemberName="All Customer" primaryKey ="sk_customer">
+				<Table name="dim_customer"/>
+				<Level name="CustomerName" column="customer_name"/>
+			</Hierarchy>
+		</Dimension>
+		<Measure name="Total Amount" column="payment_amount" aggregator="sum" formatString="Standard"/>
+	</Cube>
+</Schema>
